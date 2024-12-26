@@ -1,0 +1,31 @@
+name: CI
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - "**.md"
+  pull_request:
+    paths-ignore:
+      - "**.md"
+  workflow_dispatch:
+
+jobs:
+  test:
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version:
+          - 22
+          - 20
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+        with:
+          node-version: "${{ matrix.node-version }}"
+      - name: Install depednency
+        run: |
+          npm ci
+      - run: node --loader ts-node/esm --no-warnings=ExperimentalWarning example.ts

@@ -1,0 +1,10 @@
+{
+  "type": "module",
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "@octokit/graphql-schema": "^15.25.0"
+  }
+}
